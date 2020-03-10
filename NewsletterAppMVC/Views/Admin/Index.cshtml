@@ -1,0 +1,36 @@
+﻿@using NewsletterAppMVC.ViewModels
+@model List<SignupVM>
+
+<div class="row no-gutters m-3">
+    <div class="card col-sm-12 col-md-10 col-lg-6 mx-auto shadow">
+        <div class="card-header text-center">
+            <h5 class="m-0">Sign-Ups</h5>
+        </div>
+        <div class="card-body">
+            @foreach (var signup in Model)
+            {
+                using (Html.BeginForm("Unsubscribe", "Admin", FormMethod.Post))
+                {
+                    @* We want to Unsubscibe a specific record so we need the Id somewhere on the page.
+                        We make it hidden here because we don't want to display it.
+                        Assign its value to the record id so that when it is clicked, that value gets passed to the Unsubscribe method *@
+                    <input type="hidden" name="Id" value="@signup.Id" />
+                    <div class="row mb-2">
+                        <div class="col-2">
+                            @signup.FirstName
+                        </div>
+                        <div class="col">
+                            @signup.LastName
+                        </div>
+                        <div class="col-5">
+                            @signup.EmailAddress
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger btn-block">Unsubscribe</button>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
